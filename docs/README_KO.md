@@ -1,4 +1,4 @@
-[English](README_EN.md) | [简体中文](README.md) | [繁體中文](README_TW.md) | [日本語](README_JA.md) | 한국어 | [Русский](README_RU.md) | [हिन्दी](README_HI.md)
+[English](../README_EN.md) | [简体中文](../README.md) | [繁體中文](README_TW.md) | [日本語](README_JA.md) | 한국어 | [Русский](README_RU.md) | [हिन्दी](README_HI.md) | [Español](README_ES.md) | [Português](README_PT.md) | [Français](README_FR.md) | [Deutsch](README_DE.md) | [العربية](README_AR.md) | [Türkçe](README_TR.md) | [Tiếng Việt](README_VI.md) | [ไทย](README_TH.md) | [Indonesia](README_ID.md)
 
 # Flux - 오픈 소스 V2Board 클라이언트
 
@@ -153,7 +153,7 @@ Future<String> getBaseUrl() async {
 ### 4. 앱 아이콘 교체
 
 1. **1024x1024** PNG 이미지 준비
-2. `assets/images/app_icon.png`에 배치
+2. `../assets/images/app_icon.png`에 배치
 3. 실행:
    ```bash
    flutter pub run flutter_launcher_icons

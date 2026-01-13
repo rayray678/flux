@@ -1,4 +1,4 @@
-[English](README_EN.md) | [简体中文](README.md) | [繁體中文](README_TW.md) | [日本語](README_JA.md) | [한국어](README_KO.md) | [Русский](README_RU.md) | हिन्दी
+[English](../README_EN.md) | [简体中文](../README.md) | [繁體中文](README_TW.md) | [日本語](README_JA.md) | [한국어](README_KO.md) | [Русский](README_RU.md) | हिन्दी | [Español](README_ES.md) | [Português](README_PT.md) | [Français](README_FR.md) | [Deutsch](README_DE.md) | [العربية](README_AR.md) | [Türkçe](README_TR.md) | [Tiếng Việt](README_VI.md) | [ไทย](README_TH.md) | [Indonesia](README_ID.md)
 
 # Flux - ओपन सोर्स V2Board क्लाइंट
 
@@ -153,7 +153,7 @@ Future<String> getBaseUrl() async {
 ### 4. ऐप आइकन बदलें
 
 1. **1024x1024** PNG छवि तैयार करें
-2. `assets/images/app_icon.png` में रखें
+2. `../assets/images/app_icon.png` में रखें
 3. चलाएं:
    ```bash
    flutter pub run flutter_launcher_icons

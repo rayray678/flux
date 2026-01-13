@@ -1,4 +1,4 @@
-[English](README_EN.md) | [简体中文](README.md) | [繁體中文](README_TW.md) | [日本語](README_JA.md) | [한국어](README_KO.md) | Русский | [हिन्दी](README_HI.md)
+[English](../README_EN.md) | [简体中文](../README.md) | [繁體中文](README_TW.md) | [日本語](README_JA.md) | [한국어](README_KO.md) | Русский | [हिन्दी](README_HI.md) | [Español](README_ES.md) | [Português](README_PT.md) | [Français](README_FR.md) | [Deutsch](README_DE.md) | [العربية](README_AR.md) | [Türkçe](README_TR.md) | [Tiếng Việt](README_VI.md) | [ไทย](README_TH.md) | [Indonesia](README_ID.md)
 
 # Flux - Открытый клиент V2Board
 
@@ -153,7 +153,7 @@ Future<String> getBaseUrl() async {
 ### 4. Замена иконки приложения
 
 1. Подготовьте PNG изображение **1024x1024**
-2. Поместите его в `assets/images/app_icon.png`
+2. Поместите его в `../assets/images/app_icon.png`
 3. Выполните:
    ```bash
    flutter pub run flutter_launcher_icons

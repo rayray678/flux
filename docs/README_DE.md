@@ -1,4 +1,4 @@
-English | [简体中文](README.md) | [繁體中文](README_TW.md) | [日本語](README_JA.md) | [한국어](README_KO.md) | [Русский](README_RU.md) | [हिन्दी](README_HI.md) | [Español](README_ES.md) | [Português](README_PT.md) | [Français](README_FR.md) | [Deutsch](README_DE.md) | [العربية](README_AR.md) | [Türkçe](README_TR.md) | [Tiếng Việt](README_VI.md) | [ไทย](README_TH.md) | [Indonesia](README_ID.md)
+[English](../README_EN.md) | [简体中文](../README.md) | [繁體中文](README_TW.md) | [日本語](README_JA.md) | [한국어](README_KO.md) | [Русский](README_RU.md) | [हिन्दी](README_HI.md) | [Español](README_ES.md) | [Português](README_PT.md) | [Français](README_FR.md) | Deutsch | [العربية](README_AR.md) | [Türkçe](README_TR.md) | [Tiếng Việt](README_VI.md) | [ไทย](README_TH.md) | [Indonesia](README_ID.md)
 
 # Flux - Open Source V2Board Client
 
@@ -25,15 +25,15 @@ Contact me on Telegram: 👉 **[@xiaoxiaonihaoya](https://t.me/xiaoxiaonihaoya)*
 
 | | | |
 | :---: | :---: | :---: |
-| <img src="assets/images/screenshots/1.png" width="200"> | <img src="assets/images/screenshots/2.png" width="200"> | <img src="assets/images/screenshots/3.png" width="200"> |
-| <img src="assets/images/screenshots/4.png" width="200"> | <img src="assets/images/screenshots/5.png" width="200"> | |
+| <img src="../assets/images/screenshots/1.png" width="200"> | <img src="../assets/images/screenshots/2.png" width="200"> | <img src="../assets/images/screenshots/3.png" width="200"> |
+| <img src="../assets/images/screenshots/4.png" width="200"> | <img src="../assets/images/screenshots/5.png" width="200"> | |
 
 ### 💻 Desktop
 
 | | |
 | :---: | :---: |
-| <img src="assets/images/screenshots/6.png" width="200"> | <img src="assets/images/screenshots/7.png" width="200"> |
-| <img src="assets/images/screenshots/8.png" width="200"> | <img src="assets/images/screenshots/9.png" width="200"> |
+| <img src="../assets/images/screenshots/6.png" width="200"> | <img src="../assets/images/screenshots/7.png" width="200"> |
+| <img src="../assets/images/screenshots/8.png" width="200"> | <img src="../assets/images/screenshots/9.png" width="200"> |
 
 ---
 
@@ -173,84 +173,6 @@ Flux supports remote configuration via OSS/CDN for **automatic domain failover**
 
 ---
 
----
-
-## 🌐 OSS Uzaktan Yapılandırma
-
-Flux, **otomatik alan adı yük devretme**, **sürüm güncellemeleri**, **duyurular** ve daha fazlası için OSS/CDN üzerinden uzaktan yapılandırmayı destekler.
-
-### Kurulum
-
-1. JSON yapılandırma dosyasını OSS/CDN'nize yükleyin (Alibaba Cloud OSS, Cloudflare R2, GitHub Raw, vb.)
-2. `lib/services/remote_config_service.dart` içindeki `_ossUrls` ayarını yapılandırın
-
-### JSON Yapılandırma Formatı
-
-```json
-{
-  "config_version": 1,
-  "domains": [
-    "https://api1.example.com/api/v1",
-    "https://api2.example.com/api/v1"
-  ],
-  "backup_subscription": "https://backup-sub.example.com/sub",
-  
-  "announcement": {
-    "enabled": true,
-    "title": "Sistem Bildirimi",
-    "content": "Hizmet normal çalışıyor.",
-    "type": "info"
-  },
-  
-  "maintenance": {
-    "enabled": false,
-    "message": "Sistem bakımı devam ediyor"
-  },
-  
-  "update": {
-    "min_version": "1.0.0",
-    "latest": {
-      "android": { "version": "1.2.0", "url": "https://example.com/flux-1.2.0.apk", "force": false },
-      "ios": { "version": "1.2.0", "url": "https://apps.apple.com/app/id123456", "force": false },
-      "windows": { "version": "1.2.0", "url": "https://example.com/flux-1.2.0-win.zip", "force": false },
-      "macos": { "version": "1.2.0", "url": "https://example.com/flux-1.2.0-mac.dmg", "force": false },
-      "linux": { "version": "1.2.0", "url": "https://example.com/flux-1.2.0-linux.tar.gz", "force": false }
-    },
-    "changelog": "1. WireGuard ve TUIC desteği eklendi\n2. Hata düzeltmeleri"
-  },
-  
-  "contact": {
-    "telegram": "https://t.me/your_group",
-    "website": "https://yoursite.com"
-  },
-  
-  "features": {
-    "invite_enabled": true,
-    "purchase_enabled": true,
-    "ssr_enabled": false
-  },
-  
-  "recommended_nodes": ["HongKong01", "Japan02"]
-}
-```
-
-### Alan Açıklamaları
-
-| Alan | Açıklama |
-|------|----------|
-| `config_version` | Önbellek doğrulama için yapılandırma sürüm numarası |
-| `domains` | API alan adı listesi, öncelik sırasına göre, otomatik kullanılabilirlik testi |
-| `backup_subscription` | Yedek abonelik URL'si |
-| `announcement` | Duyuru yapılandırması, `type` şunlar olabilir: `info`/`warning`/`error` |
-| `maintenance` | Bakım modu, etkinleştirildiğinde kullanıcı işlemlerini engeller |
-| `update` | Sürüm güncelleme bilgisi, zorunlu güncelleme için `force: true` |
-| `min_version` | Desteklenen minimum sürüm, eski sürümler güncellemeye zorlanır |
-| `contact` | Müşteri destek bağlantıları |
-| `features` | Özellik anahtarları |
-| `recommended_nodes` | Önerilen düğüm adları listesi |
-
----
-
 ## 🚀 Quick Start
 
 ### 1. Clone the Repository
@@ -308,7 +230,7 @@ Replace `com.example.yourapp` with your own App ID (e.g., `com.yourname.project`
 #### Method 1: Using flutter_launcher_icons (Recommended)
 
 1. Prepare a **1024x1024** PNG image (square, no transparency preferred)
-2. Place it at `assets/images/app_icon.png`
+2. Place it at `../assets/images/app_icon.png`
 3. Ensure `pubspec.yaml` contains:
    ```yaml
    dev_dependencies:
@@ -317,7 +239,7 @@ Replace `com.example.yourapp` with your own App ID (e.g., `com.yourname.project`
    flutter_launcher_icons:
      android: true
      ios: true
-     image_path: "assets/images/app_icon.png"
+     image_path: "../assets/images/app_icon.png"
      remove_alpha_ios: true
    ```
 4. Run:
@@ -415,7 +337,7 @@ If this project helps you, consider buying the author a coffee!
 
 | USDT (TRC20) | USDC (Arbitrum) | ETH (Arbitrum) | USDT (ERC20) |
 | :---: | :---: | :---: | :---: |
-| <img src="assets/images/donation/usdt_trc20.png" width="180" alt="USDT TRC20"> | <img src="assets/images/donation/usdc_arbitrum.png" width="180" alt="USDC Arbitrum"> | <img src="assets/images/donation/eth_arbitrum.png" width="180" alt="ETH Arbitrum"> | <img src="assets/images/donation/usdt_erc20.png" width="180" alt="USDT ERC20"> |
+| <img src="../assets/images/donation/usdt_trc20.png" width="180" alt="USDT TRC20"> | <img src="../assets/images/donation/usdc_arbitrum.png" width="180" alt="USDC Arbitrum"> | <img src="../assets/images/donation/eth_arbitrum.png" width="180" alt="ETH Arbitrum"> | <img src="../assets/images/donation/usdt_erc20.png" width="180" alt="USDT ERC20"> |
 
 ---
 

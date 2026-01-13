@@ -1,4 +1,4 @@
-[English](README_EN.md) | [简体中文](README.md) | 繁體中文 | [日本語](README_JA.md) | [한국어](README_KO.md) | [Русский](README_RU.md) | [हिन्दी](README_HI.md)
+[English](../README_EN.md) | [简体中文](../README.md) | 繁體中文 | [日本語](README_JA.md) | [한국어](README_KO.md) | [Русский](README_RU.md) | [हिन्दी](README_HI.md) | [Español](README_ES.md) | [Português](README_PT.md) | [Français](README_FR.md) | [Deutsch](README_DE.md) | [العربية](README_AR.md) | [Türkçe](README_TR.md) | [Tiếng Việt](README_VI.md) | [ไทย](README_TH.md) | [Indonesia](README_ID.md)
 
 # Flux - 開源 V2Board 客戶端
 
@@ -154,7 +154,7 @@ Future<String> getBaseUrl() async {
 ### 4. 替換應用程式圖示
 
 1. 準備一張 **1024x1024** 的 PNG 圖片
-2. 放到 `assets/images/app_icon.png`
+2. 放到 `../assets/images/app_icon.png`
 3. 執行：
    ```bash
    flutter pub run flutter_launcher_icons

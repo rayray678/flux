@@ -1,4 +1,4 @@
-﻿[English](README_EN.md) | 简体中文 | [繁體中文](README_TW.md) | [日本語](README_JA.md) | [한국어](README_KO.md) | [Русский](README_RU.md) | [हिन्दी](README_HI.md) | [Español](README_ES.md) | [Português](README_PT.md) | [Français](README_FR.md) | [Deutsch](README_DE.md) | [العربية](README_AR.md) | [Türkçe](README_TR.md) | [Tiếng Việt](README_VI.md) | [ไทย](README_TH.md) | [Indonesia](README_ID.md)
+[English](README_EN.md) | 简体中文 | [繁體中文](docs/README_TW.md) | [日本語](docs/README_JA.md) | [한국어](docs/README_KO.md) | [Русский](docs/README_RU.md) | [हिन्दी](docs/README_HI.md) | [Español](docs/README_ES.md) | [Português](docs/README_PT.md) | [Français](docs/README_FR.md) | [Deutsch](docs/README_DE.md) | [العربية](docs/README_AR.md) | [Türkçe](docs/README_TR.md) | [Tiếng Việt](docs/README_VI.md) | [ไทย](docs/README_TH.md) | [Indonesia](docs/README_ID.md)
 
 # Flux - Open Source V2Board Client
 

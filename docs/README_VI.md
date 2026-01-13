@@ -1,4 +1,4 @@
-English | [简体中文](README.md) | [繁體中文](README_TW.md) | [日本語](README_JA.md) | [한국어](README_KO.md) | [Русский](README_RU.md) | [हिन्दी](README_HI.md) | [Español](README_ES.md) | [Português](README_PT.md) | [Français](README_FR.md) | [Deutsch](README_DE.md) | [العربية](README_AR.md) | [Türkçe](README_TR.md) | [Tiếng Việt](README_VI.md) | [ไทย](README_TH.md) | [Indonesia](README_ID.md)
+[English](../README_EN.md) | [简体中文](../README.md) | [繁體中文](README_TW.md) | [日本語](README_JA.md) | [한국어](README_KO.md) | [Русский](README_RU.md) | [हिन्दी](README_HI.md) | [Español](README_ES.md) | [Português](README_PT.md) | [Français](README_FR.md) | [Deutsch](README_DE.md) | [العربية](README_AR.md) | [Türkçe](README_TR.md) | Tiếng Việt | [ไทย](README_TH.md) | [Indonesia](README_ID.md)
 
 # Flux - Open Source V2Board Client
 
@@ -25,15 +25,15 @@ Contact me on Telegram: 👉 **[@xiaoxiaonihaoya](https://t.me/xiaoxiaonihaoya)*
 
 | | | |
 | :---: | :---: | :---: |
-| <img src="assets/images/screenshots/1.png" width="200"> | <img src="assets/images/screenshots/2.png" width="200"> | <img src="assets/images/screenshots/3.png" width="200"> |
-| <img src="assets/images/screenshots/4.png" width="200"> | <img src="assets/images/screenshots/5.png" width="200"> | |
+| <img src="../assets/images/screenshots/1.png" width="200"> | <img src="../assets/images/screenshots/2.png" width="200"> | <img src="../assets/images/screenshots/3.png" width="200"> |
+| <img src="../assets/images/screenshots/4.png" width="200"> | <img src="../assets/images/screenshots/5.png" width="200"> | |
 
 ### 💻 Desktop
 
 | | |
 | :---: | :---: |
-| <img src="assets/images/screenshots/6.png" width="200"> | <img src="assets/images/screenshots/7.png" width="200"> |
-| <img src="assets/images/screenshots/8.png" width="200"> | <img src="assets/images/screenshots/9.png" width="200"> |
+| <img src="../assets/images/screenshots/6.png" width="200"> | <img src="../assets/images/screenshots/7.png" width="200"> |
+| <img src="../assets/images/screenshots/8.png" width="200"> | <img src="../assets/images/screenshots/9.png" width="200"> |
 
 ---
 
@@ -175,16 +175,16 @@ Flux supports remote configuration via OSS/CDN for **automatic domain failover**
 
 ---
 
-## 🌐 Konfigurasi Jarak Jauh OSS
+## 🌐 Cấu hình từ xa OSS
 
-Flux mendukung konfigurasi jarak jauh melalui OSS/CDN untuk **failover domain otomatis**, **pembaruan versi**, **pengumuman**, dan lainnya.
+Flux hỗ trợ cấu hình từ xa qua OSS/CDN để **tự động chuyển đổi tên miền khi lỗi**, **cập nhật phiên bản**, **thông báo**, và hơn thế nữa.
 
-### Pengaturan
+### Thiết lập
 
-1. Unggah file konfigurasi JSON ke OSS/CDN Anda (Alibaba Cloud OSS, Cloudflare R2, GitHub Raw, dll.)
-2. Konfigurasi `_ossUrls` di `lib/services/remote_config_service.dart`
+1. Tải tệp cấu hình JSON lên OSS/CDN của bạn (Alibaba Cloud OSS, Cloudflare R2, GitHub Raw, v.v.)
+2. Cấu hình `_ossUrls` trong `lib/services/remote_config_service.dart`
 
-### Format Konfigurasi JSON
+### Định dạng cấu hình JSON
 
 ```json
 {
@@ -197,14 +197,14 @@ Flux mendukung konfigurasi jarak jauh melalui OSS/CDN untuk **failover domain ot
   
   "announcement": {
     "enabled": true,
-    "title": "Pemberitahuan Sistem",
-    "content": "Layanan berjalan normal.",
+    "title": "Thông báo hệ thống",
+    "content": "Dịch vụ đang hoạt động bình thường.",
     "type": "info"
   },
   
   "maintenance": {
     "enabled": false,
-    "message": "Pemeliharaan sistem sedang berlangsung"
+    "message": "Đang bảo trì hệ thống"
   },
   
   "update": {
@@ -216,7 +216,7 @@ Flux mendukung konfigurasi jarak jauh melalui OSS/CDN untuk **failover domain ot
       "macos": { "version": "1.2.0", "url": "https://example.com/flux-1.2.0-mac.dmg", "force": false },
       "linux": { "version": "1.2.0", "url": "https://example.com/flux-1.2.0-linux.tar.gz", "force": false }
     },
-    "changelog": "1. Menambahkan dukungan WireGuard dan TUIC\n2. Perbaikan bug"
+    "changelog": "1. Đã thêm hỗ trợ WireGuard và TUIC\n2. Sửa lỗi"
   },
   
   "contact": {
@@ -234,20 +234,20 @@ Flux mendukung konfigurasi jarak jauh melalui OSS/CDN untuk **failover domain ot
 }
 ```
 
-### Deskripsi Bidang
+### Mô tả trường
 
-| Bidang | Deskripsi |
-|--------|-----------|
-| `config_version` | Nomor versi konfigurasi untuk validasi cache |
-| `domains` | Daftar domain API, dalam urutan prioritas, tes ketersediaan otomatis |
-| `backup_subscription` | URL langganan cadangan |
-| `announcement` | Konfigurasi pengumuman, `type` bisa berupa `info`/`warning`/`error` |
-| `maintenance` | Mode pemeliharaan, memblokir operasi pengguna saat diaktifkan |
-| `update` | Info pembaruan versi, `force: true` untuk pembaruan wajib |
-| `min_version` | Versi minimum yang didukung, versi lama dipaksa untuk memperbarui |
-| `contact` | Tautan dukungan pelanggan |
-| `features` | Beralih fitur |
-| `recommended_nodes` | Daftar nama node yang direkomendasikan |
+| Trường | Mô tả |
+|--------|-------|
+| `config_version` | Số phiên bản cấu hình để xác thực bộ nhớ cache |
+| `domains` | Danh sách tên miền API, theo thứ tự ưu tiên, tự động kiểm tra khả dụng |
+| `backup_subscription` | URL đăng ký dự phòng |
+| `announcement` | Cấu hình thông báo, `type` có thể là `info`/`warning`/`error` |
+| `maintenance` | Chế độ bảo trì, chặn thao tác người dùng khi bật |
+| `update` | Thông tin cập nhật phiên bản, `force: true` để bắt buộc cập nhật |
+| `min_version` | Phiên bản tối thiểu được hỗ trợ, các phiên bản cũ hơn buộc phải cập nhật |
+| `contact` | Liên kết hỗ trợ khách hàng |
+| `features` | Bật/tắt tính năng |
+| `recommended_nodes` | Danh sách tên nút được đề xuất |
 
 ---
 
@@ -308,7 +308,7 @@ Replace `com.example.yourapp` with your own App ID (e.g., `com.yourname.project`
 #### Method 1: Using flutter_launcher_icons (Recommended)
 
 1. Prepare a **1024x1024** PNG image (square, no transparency preferred)
-2. Place it at `assets/images/app_icon.png`
+2. Place it at `../assets/images/app_icon.png`
 3. Ensure `pubspec.yaml` contains:
    ```yaml
    dev_dependencies:
@@ -317,7 +317,7 @@ Replace `com.example.yourapp` with your own App ID (e.g., `com.yourname.project`
    flutter_launcher_icons:
      android: true
      ios: true
-     image_path: "assets/images/app_icon.png"
+     image_path: "../assets/images/app_icon.png"
      remove_alpha_ios: true
    ```
 4. Run:
@@ -415,7 +415,7 @@ If this project helps you, consider buying the author a coffee!
 
 | USDT (TRC20) | USDC (Arbitrum) | ETH (Arbitrum) | USDT (ERC20) |
 | :---: | :---: | :---: | :---: |
-| <img src="assets/images/donation/usdt_trc20.png" width="180" alt="USDT TRC20"> | <img src="assets/images/donation/usdc_arbitrum.png" width="180" alt="USDC Arbitrum"> | <img src="assets/images/donation/eth_arbitrum.png" width="180" alt="ETH Arbitrum"> | <img src="assets/images/donation/usdt_erc20.png" width="180" alt="USDT ERC20"> |
+| <img src="../assets/images/donation/usdt_trc20.png" width="180" alt="USDT TRC20"> | <img src="../assets/images/donation/usdc_arbitrum.png" width="180" alt="USDC Arbitrum"> | <img src="../assets/images/donation/eth_arbitrum.png" width="180" alt="ETH Arbitrum"> | <img src="../assets/images/donation/usdt_erc20.png" width="180" alt="USDT ERC20"> |
 
 ---
 

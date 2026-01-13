@@ -1,4 +1,4 @@
-English | [简体中文](README.md) | [繁體中文](README_TW.md) | [日本語](README_JA.md) | [한국어](README_KO.md) | [Русский](README_RU.md) | [हिन्दी](README_HI.md) | [Español](README_ES.md) | [Português](README_PT.md) | [Français](README_FR.md) | [Deutsch](README_DE.md) | [العربية](README_AR.md) | [Türkçe](README_TR.md) | [Tiếng Việt](README_VI.md) | [ไทย](README_TH.md) | [Indonesia](README_ID.md)
+[English](../README_EN.md) | [简体中文](../README.md) | [繁體中文](README_TW.md) | [日本語](README_JA.md) | [한국어](README_KO.md) | [Русский](README_RU.md) | [हिन्दी](README_HI.md) | [Español](README_ES.md) | [Português](README_PT.md) | Français | [Deutsch](README_DE.md) | [العربية](README_AR.md) | [Türkçe](README_TR.md) | [Tiếng Việt](README_VI.md) | [ไทย](README_TH.md) | [Indonesia](README_ID.md)
 
 # Flux - Open Source V2Board Client
 
@@ -25,15 +25,15 @@ Contact me on Telegram: 👉 **[@xiaoxiaonihaoya](https://t.me/xiaoxiaonihaoya)*
 
 | | | |
 | :---: | :---: | :---: |
-| <img src="assets/images/screenshots/1.png" width="200"> | <img src="assets/images/screenshots/2.png" width="200"> | <img src="assets/images/screenshots/3.png" width="200"> |
-| <img src="assets/images/screenshots/4.png" width="200"> | <img src="assets/images/screenshots/5.png" width="200"> | |
+| <img src="../assets/images/screenshots/1.png" width="200"> | <img src="../assets/images/screenshots/2.png" width="200"> | <img src="../assets/images/screenshots/3.png" width="200"> |
+| <img src="../assets/images/screenshots/4.png" width="200"> | <img src="../assets/images/screenshots/5.png" width="200"> | |
 
 ### 💻 Desktop
 
 | | |
 | :---: | :---: |
-| <img src="assets/images/screenshots/6.png" width="200"> | <img src="assets/images/screenshots/7.png" width="200"> |
-| <img src="assets/images/screenshots/8.png" width="200"> | <img src="assets/images/screenshots/9.png" width="200"> |
+| <img src="../assets/images/screenshots/6.png" width="200"> | <img src="../assets/images/screenshots/7.png" width="200"> |
+| <img src="../assets/images/screenshots/8.png" width="200"> | <img src="../assets/images/screenshots/9.png" width="200"> |
 
 ---
 
@@ -175,16 +175,16 @@ Flux supports remote configuration via OSS/CDN for **automatic domain failover**
 
 ---
 
-## 🌐 Configuración Remota OSS
+## 🌐 Configuration Distante OSS
 
-Flux soporta la configuración remota a través de OSS/CDN para **conmutación automática de dominios**, **actualizaciones de versiones**, **anuncios**, y más.
+Flux prend en charge la configuration distante via OSS/CDN pour **le basculement automatique de domaine**, **les mises à jour de version**, **les annonces**, et plus encore.
 
-### Configuración
+### Configuration
 
-1. Sube el archivo de configuración JSON a tu OSS/CDN (Alibaba Cloud OSS, Cloudflare R2, GitHub Raw, etc.)
-2. Configura `_ossUrls` en `lib/services/remote_config_service.dart`
+1. Téléchargez le fichier de configuration JSON sur votre OSS/CDN (Alibaba Cloud OSS, Cloudflare R2, GitHub Raw, etc.)
+2. Configurez `_ossUrls` dans `lib/services/remote_config_service.dart`
 
-### Formato de Configuración JSON
+### Format de Configuration JSON
 
 ```json
 {
@@ -197,14 +197,14 @@ Flux soporta la configuración remota a través de OSS/CDN para **conmutación a
   
   "announcement": {
     "enabled": true,
-    "title": "Aviso del Sistema",
-    "content": "El servicio funciona con normalidad.",
+    "title": "Avis Système",
+    "content": "Le service fonctionne normalement.",
     "type": "info"
   },
   
   "maintenance": {
     "enabled": false,
-    "message": "Mantenimiento del sistema en curso"
+    "message": "Maintenance du système en cours"
   },
   
   "update": {
@@ -216,7 +216,7 @@ Flux soporta la configuración remota a través de OSS/CDN para **conmutación a
       "macos": { "version": "1.2.0", "url": "https://example.com/flux-1.2.0-mac.dmg", "force": false },
       "linux": { "version": "1.2.0", "url": "https://example.com/flux-1.2.0-linux.tar.gz", "force": false }
     },
-    "changelog": "1. Soporte añadido para WireGuard y TUIC\n2. Corrección de errores"
+    "changelog": "1. Ajout du support WireGuard et TUIC\n2. Corrections de bugs"
   },
   
   "contact": {
@@ -234,20 +234,20 @@ Flux soporta la configuración remota a través de OSS/CDN para **conmutación a
 }
 ```
 
-### Descripción de Campos
+### Description des Champs
 
-| Campo | Descripción |
+| Champ | Description |
 |-------|-------------|
-| `config_version` | Número de versión de config para validación de caché |
-| `domains` | Lista de dominios API, en orden de prioridad, auto-test de disponibilidad |
-| `backup_subscription` | URL de suscripción de respaldo |
-| `announcement` | Configuración de anuncios, `type` puede ser `info`/`warning`/`error` |
-| `maintenance` | Modo de mantenimiento, bloquea acciones del usuario si está habilitado |
-| `update` | Info de actualización, `force: true` para actualización obligatoria |
-| `min_version` | Versión mínima soportada, versiones antiguas forzadas a actualizar |
-| `contact` | Enlaces de soporte al cliente |
-| `features` | Interruptores de funciones |
-| `recommended_nodes` | Lista de nombres de nodos recomendados |
+| `config_version` | Numéro de version de config pour validation du cache |
+| `domains` | Liste des domaines API, par ordre de priorité, auto-test de disponibilité |
+| `backup_subscription` | URL d'abonnement de secours |
+| `announcement` | Config d'annonce, `type` peut être `info`/`warning`/`error` |
+| `maintenance` | Mode maintenance, bloque les opérations utilisateur si activé |
+| `update` | Info de mise à jour, `force: true` pour mise à jour obligatoire |
+| `min_version` | Version minimale supportée, les versions antérieures doivent être mises à jour |
+| `contact` | Liens de support client |
+| `features` | Bascules de fonctionnalités |
+| `recommended_nodes` | Liste des noms de nœuds recommandés |
 
 ---
 
@@ -308,7 +308,7 @@ Replace `com.example.yourapp` with your own App ID (e.g., `com.yourname.project`
 #### Method 1: Using flutter_launcher_icons (Recommended)
 
 1. Prepare a **1024x1024** PNG image (square, no transparency preferred)
-2. Place it at `assets/images/app_icon.png`
+2. Place it at `../assets/images/app_icon.png`
 3. Ensure `pubspec.yaml` contains:
    ```yaml
    dev_dependencies:
@@ -317,7 +317,7 @@ Replace `com.example.yourapp` with your own App ID (e.g., `com.yourname.project`
    flutter_launcher_icons:
      android: true
      ios: true
-     image_path: "assets/images/app_icon.png"
+     image_path: "../assets/images/app_icon.png"
      remove_alpha_ios: true
    ```
 4. Run:
@@ -415,7 +415,7 @@ If this project helps you, consider buying the author a coffee!
 
 | USDT (TRC20) | USDC (Arbitrum) | ETH (Arbitrum) | USDT (ERC20) |
 | :---: | :---: | :---: | :---: |
-| <img src="assets/images/donation/usdt_trc20.png" width="180" alt="USDT TRC20"> | <img src="assets/images/donation/usdc_arbitrum.png" width="180" alt="USDC Arbitrum"> | <img src="assets/images/donation/eth_arbitrum.png" width="180" alt="ETH Arbitrum"> | <img src="assets/images/donation/usdt_erc20.png" width="180" alt="USDT ERC20"> |
+| <img src="../assets/images/donation/usdt_trc20.png" width="180" alt="USDT TRC20"> | <img src="../assets/images/donation/usdc_arbitrum.png" width="180" alt="USDC Arbitrum"> | <img src="../assets/images/donation/eth_arbitrum.png" width="180" alt="ETH Arbitrum"> | <img src="../assets/images/donation/usdt_erc20.png" width="180" alt="USDT ERC20"> |
 
 ---
 

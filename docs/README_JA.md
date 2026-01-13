@@ -1,4 +1,4 @@
-[English](README_EN.md) | [简体中文](README.md) | [繁體中文](README_TW.md) | 日本語 | [한국어](README_KO.md) | [Русский](README_RU.md) | [हिन्दी](README_HI.md)
+[English](../README_EN.md) | [简体中文](../README.md) | [繁體中文](README_TW.md) | 日本語 | [한국어](README_KO.md) | [Русский](README_RU.md) | [हिन्दी](README_HI.md) | [Español](README_ES.md) | [Português](README_PT.md) | [Français](README_FR.md) | [Deutsch](README_DE.md) | [العربية](README_AR.md) | [Türkçe](README_TR.md) | [Tiếng Việt](README_VI.md) | [ไทย](README_TH.md) | [Indonesia](README_ID.md)
 
 # Flux - オープンソース V2Board クライアント
 
@@ -153,7 +153,7 @@ Future<String> getBaseUrl() async {
 ### 4. アプリアイコンの置き換え
 
 1. **1024x1024** の PNG 画像を準備
-2. `assets/images/app_icon.png` に配置
+2. `../assets/images/app_icon.png` に配置
 3. 実行：
    ```bash
    flutter pub run flutter_launcher_icons
