@@ -259,14 +259,20 @@ class V2rayService {
     final exePath = Platform.resolvedExecutable;
     final exeDir = File(exePath).parent.path;
     
-    // 平台特定的二进制文件目录
-    final platformDir = 'windows';
-    var binSourceDir = path.join(exeDir, 'data', 'flutter_assets', 'assets', 'bin', platformDir);
-    var dataSourceDir = path.join(exeDir, 'data', 'flutter_assets', 'assets', 'bin'); // geoip/geosite 在根目录
+    // 首先检查 CMake 安装位置 (Release build)
+    var binSourceDir = path.join(exeDir, 'data', 'xray-bin');
+    var dataSourceDir = binSourceDir;
     
+    // 如果 CMake 路径不存在，尝试 flutter_assets (可能是 debug 或不同的打包方式)
+    if (!await Directory(binSourceDir).exists()) {
+       binSourceDir = path.join(exeDir, 'data', 'flutter_assets', 'assets', 'bin', 'windows');
+       dataSourceDir = path.join(exeDir, 'data', 'flutter_assets', 'assets', 'bin');
+    }
+    
+    // 最后尝试开发环境路径
     if (!await Directory(binSourceDir).exists()) {
        print('[V2rayService] Source dir not found at $binSourceDir, trying dev fallback...');
-       binSourceDir = path.join('assets', 'bin', platformDir);
+       binSourceDir = path.join('assets', 'bin', 'windows');
        dataSourceDir = path.join('assets', 'bin');
     }
     
@@ -320,16 +326,22 @@ class V2rayService {
        archName = Platform.version.contains('arm64') ? 'xray-linux-arm64' : 'xray-linux-amd64';
      }
      
+     final exePath = Platform.resolvedExecutable;
+     final exeDir = File(exePath).parent.path;
+
      final possiblePaths = [
-       'assets/bin/$archName', // 开发环境
+       path.join(exeDir, 'data', 'xray-bin', archName), // Linux Bundle Path
+       path.join(exeDir, '..', 'Frameworks', 'App.framework', 'Resources', 'flutter_assets', 'assets', 'bin', archName), // Mac Bundle Path (Approx)
+       path.join(exeDir, '..', 'Resources', 'xray-bin', archName), // Mac possible custom location
+       'assets/bin/$archName', // Dev environment
        '/usr/local/bin/xray', 
      ];
-     // 还可以添加打包后的路径检查
      
      for (final p in possiblePaths) {
-       if (await File(p).exists()) {
+       final f = File(p);
+       if (await f.exists()) {
          if (!Platform.isWindows) try { await Process.run('chmod', ['+x', p]); } catch(_) {}
-         return (p, File(p).parent.path);
+         return (f.absolute.path, f.parent.path);
        }
      }
      return (null, null);

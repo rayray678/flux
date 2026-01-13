@@ -254,6 +254,189 @@ class ServerNode {
     }
   }
 
+  /// 从 Shadowsocks 链接解析
+  static ServerNode? fromShadowsocks(String ssLink) {
+    try {
+      if (!ssLink.startsWith('ss://')) return null;
+
+      var uri = Uri.parse(ssLink);
+      String userInfo = uri.userInfo;
+      
+      // 处理 ss://BASE64@HOST:PORT#TAG 格式
+      if (userInfo.isEmpty && uri.host.isNotEmpty && !ssLink.contains('@')) {
+         // 可能是全 Base64 格式 ss://Base64(#Tag)
+         String base64Str = ssLink.substring(5);
+         String tag = '';
+         if (base64Str.contains('#')) {
+            final parts = base64Str.split('#');
+            base64Str = parts[0];
+            if (parts.length > 1) tag = parts[1];
+         }
+         
+         try {
+           // 补全 padding
+           final padding = base64Str.length % 4;
+           if (padding > 0) base64Str += '=' * (4 - padding);
+           final decoded = utf8.decode(base64Decode(base64Str));
+           // decoded 格式: method:password@host:port
+           final lastAt = decoded.lastIndexOf('@');
+           if (lastAt == -1) return null;
+           
+           userInfo = decoded.substring(0, lastAt);
+           final addressPart = decoded.substring(lastAt + 1);
+           final colonIndex = addressPart.lastIndexOf(':');
+           if (colonIndex == -1) return null;
+           
+           final host = addressPart.substring(0, colonIndex);
+           final port = int.tryParse(addressPart.substring(colonIndex + 1)) ?? 0;
+           
+           // 解析 user info (method:password)
+           final methodPass = userInfo.split(':');
+           if (methodPass.length < 2) return null;
+           
+           return ServerNode(
+             name: _decodeNodeName(tag, fallback: 'Shadowsocks'),
+             address: host,
+             port: port,
+             protocol: 'shadowsocks',
+             uuid: methodPass.sublist(1).join(':'),
+             security: methodPass[0],
+             rawConfig: {
+               'password': methodPass.sublist(1).join(':'),
+               'method': methodPass[0],
+             },
+           );
+         } catch (_) {
+           return null;
+         }
+      }
+
+      // 处理普通 URL 格式 ss://method:password@host:port#tag:
+      // 如果 userInfo 是 base64 编码的 (不含 :)
+      if (!userInfo.contains(':')) {
+         try {
+           final decodedUser = utf8.decode(base64Decode(userInfo));
+           userInfo = decodedUser;
+         } catch (_) {}
+      }
+      
+      final parts = userInfo.split(':');
+      if (parts.length < 2) return null;
+      
+      final method = parts[0];
+      final password = parts.sublist(1).join(':');
+
+      return ServerNode(
+        name: _decodeNodeName(uri.fragment, fallback: 'Shadowsocks'),
+        address: uri.host,
+        port: uri.port,
+        protocol: 'shadowsocks',
+        uuid: password,
+        security: method,
+        rawConfig: {
+          'password': password,
+          'method': method,
+        },
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// 从 Hysteria2 链接解析
+  static ServerNode? fromHysteria2(String link) {
+    try {
+      if (!link.startsWith('hysteria2://') && !link.startsWith('hy2://')) {
+        return null; 
+      }
+
+      final uri = Uri.parse(link);
+      final query = uri.queryParameters;
+      
+      // hy2://password@host:port
+      final password = uri.userInfo;
+      final server = uri.host;
+      final port = uri.port;
+      
+      final sni = query['peer'] ?? query['sni'];
+      final insecure = _parseBool(query['insecure'] ?? query['allowInsecure']);
+      final obfs = query['obfs'];
+      final obfsPassword = query['obfs-password'];
+
+      return ServerNode(
+        name: _decodeNodeName(uri.fragment, fallback: 'Hysteria2'),
+        address: server,
+        port: port,
+        protocol: 'hysteria2',
+        uuid: password,
+        network: 'udp',
+        rawConfig: {
+          'password': password,
+          'auth': password,
+          'server': server,
+          'port': port,
+          if (sni != null) 'sni': sni,
+          if (insecure != null) 'allowInsecure': insecure,
+          if (obfs != null) 'obfs': obfs,
+          if (obfsPassword != null) 'obfs-password': obfsPassword,
+        },
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// 智能解析订阅内容
+  static List<ServerNode> parseFromContent(String content) {
+    if (content.isEmpty) return [];
+
+    var decodedContent = content;
+    // 简单判断是否 Base64
+    if (!content.contains('://')) {
+      try {
+        final clean = content.trim().replaceAll(RegExp(r'\s+'), '');
+        final padding = clean.length % 4;
+        final padded = padding > 0 ? clean + '=' * (4 - padding) : clean;
+        final decoded = utf8.decode(base64Decode(padded));
+        // 如果解码后看起来像是有协议头的，或者多行内容
+        if (decoded.contains('://') || decoded.contains('\n')) {
+          decodedContent = decoded;
+        }
+      } catch (_) {
+        // 解码失败，假设不是 Base64，继续尝试直接解析
+      }
+    }
+
+    final nodes = <ServerNode>[];
+    final lines = LineSplitter.split(decodedContent);
+
+    for (var line in lines) {
+      line = line.trim();
+      if (line.isEmpty) continue;
+
+      try {
+        if (line.startsWith('vmess://')) {
+          nodes.add(ServerNode.fromVmess(line));
+        } else if (line.startsWith('vless://')) {
+          final node = ServerNode.fromVless(line);
+          if (node != null) nodes.add(node);
+        } else if (line.startsWith('trojan://')) {
+          final node = ServerNode.fromTrojan(line);
+          if (node != null) nodes.add(node);
+        } else if (line.startsWith('ss://')) {
+          final node = ServerNode.fromShadowsocks(line);
+          if (node != null) nodes.add(node);
+        } else if (line.startsWith('hysteria2://') || line.startsWith('hy2://')) {
+           final node = ServerNode.fromHysteria2(line);
+           if (node != null) nodes.add(node);
+        }
+      } catch (_) {
+        // 忽略单行解析错误
+      }
+    }
+    return nodes;
+  }
+
   static String _decodeNodeName(String fragment, {required String fallback}) {
     if (fragment.isEmpty) return fallback;
     try {

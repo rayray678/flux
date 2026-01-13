@@ -95,7 +95,8 @@ install(DIRECTORY "${NATIVE_ASSETS_DIR}"
 
 # Copy desktop binaries (xray-core) separately to avoid bundling in Flutter assets
 install(FILES 
-    "${CMAKE_CURRENT_SOURCE_DIR}/../assets/bin/xray.exe"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../assets/bin/windows/xray-windows-amd64.exe"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../assets/bin/windows/xray-windows-arm64.exe"
     "${CMAKE_CURRENT_SOURCE_DIR}/../assets/bin/geoip.dat"
     "${CMAKE_CURRENT_SOURCE_DIR}/../assets/bin/geosite.dat"
     DESTINATION "${INSTALL_BUNDLE_DATA_DIR}/xray-bin"
