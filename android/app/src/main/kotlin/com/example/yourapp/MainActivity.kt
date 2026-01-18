@@ -283,7 +283,8 @@ class MainActivity : FlutterActivity() {
             Thread {
                 try {
                     Log.d(TAG, "Xray 核心线程启动，开始调用 startLoop...")
-                    controller.startLoop(configContent)
+                    // tunFd=0 表示不使用内核侧 TUN（由 tun2socks 处理）
+                    controller.startLoop(configContent, 0)
                     Log.i(TAG, "Xray 核心启动成功（startLoop 返回）")
                     isV2rayRunning = true
                     isCoreRunning = true
