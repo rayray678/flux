@@ -18,6 +18,22 @@ jobs:
         with:
           channel: "stable"
           cache: true
+      - name: Download Fixed Version Kernel (v2rayNG 1.9.1)
+        run: |
+          set -e
+          TARGET_PATH="android/app/src/main/libs"
+          mkdir -p "$TARGET_PATH"
+          VERSION="1.9.1"
+          URL_PRIMARY="https://github.com/2dust/v2rayNG/raw/v${VERSION}/app/libs/libv2ray.aar"
+          URL_FALLBACK="https://github.com/2dust/v2rayNG/raw/${VERSION}/app/libs/libv2ray.aar"
+          echo "Downloading libv2ray.aar from v2rayNG tag ${VERSION}..."
+          curl -L -o "$TARGET_PATH/libv2ray.aar" "$URL_PRIMARY" || \
+            curl -L -o "$TARGET_PATH/libv2ray.aar" "$URL_FALLBACK"
+          if [ ! -s "$TARGET_PATH/libv2ray.aar" ]; then
+            echo "Error: Downloaded file is empty or failed."
+            exit 1
+          fi
+          ls -lh "$TARGET_PATH/libv2ray.aar"
       - run: flutter pub get
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
