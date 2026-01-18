@@ -18,30 +18,33 @@ jobs:
         with:
           channel: "stable"
           cache: true
-      - name: Download Fixed Version Kernel (v2rayNG 1.9.1)
+      - name: Download Real Hy2 Kernel (Handle Git LFS)
         run: |
           set -e
           TARGET_PATH="android/app/src/main/libs"
           mkdir -p "$TARGET_PATH"
-          VERSION="1.9.1"
-          echo "Fetching libv2ray.aar from v2rayNG tag ${VERSION} via git-lfs..."
+          echo "Installing Git LFS..."
           sudo apt-get update -y
           sudo apt-get install -y git-lfs
           git lfs install
+          echo "Cloning v2rayNG to extract real AAR..."
           rm -rf /tmp/v2rayng
-          git clone --depth 1 --branch "v${VERSION}" https://github.com/2dust/v2rayNG.git /tmp/v2rayng || \
-            git clone --depth 1 --branch "${VERSION}" https://github.com/2dust/v2rayNG.git /tmp/v2rayng
+          git clone --depth 1 https://github.com/2dust/v2rayNG.git /tmp/v2rayng
+          cd /tmp/v2rayng
+          git lfs pull
+          cd -
           if [ ! -f "/tmp/v2rayng/app/libs/libv2ray.aar" ]; then
-            echo "Error: libv2ray.aar not found in v2rayNG repo."
+            echo "Error: Could not find libv2ray.aar in the cloned repository."
             exit 1
           fi
           cp "/tmp/v2rayng/app/libs/libv2ray.aar" "$TARGET_PATH/libv2ray.aar"
-          if [ ! -s "$TARGET_PATH/libv2ray.aar" ]; then
-            echo "Error: Downloaded file is empty or failed."
+          if unzip -t "$TARGET_PATH/libv2ray.aar" >/dev/null; then
+            echo "Success: Real libv2ray.aar is ready."
+            ls -lh "$TARGET_PATH/libv2ray.aar"
+          else
+            echo "Error: libv2ray.aar is corrupted or still an LFS pointer."
             exit 1
           fi
-          unzip -t "$TARGET_PATH/libv2ray.aar" >/dev/null
-          ls -lh "$TARGET_PATH/libv2ray.aar"
       - run: flutter pub get
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
