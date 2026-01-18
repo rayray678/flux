@@ -5,11 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-<<<<<<< HEAD
-	<string>Flux</string>
-=======
 	<string>大厨来了</string>
->>>>>>> 6092ec7 (Initialize XBoard config and CI builds)
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -17,11 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-<<<<<<< HEAD
-	<string>flux</string>
-=======
 	<string>大厨来了</string>
->>>>>>> 6092ec7 (Initialize XBoard config and CI builds)
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

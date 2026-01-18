@@ -17,11 +17,7 @@ class ApiConfig {
       return await _remoteConfig.getActiveDomain();
     } catch (e) {
       // 远程配置获取失败，返回默认域名
-<<<<<<< HEAD
-      return 'YOUR_API_URL_HERE';
-=======
       return 'https://vip8888.dpdns.org/api/v1';
->>>>>>> 6092ec7 (Initialize XBoard config and CI builds)
     }
   }
 
@@ -77,4 +73,3 @@ class ApiConfig {
     _authDataCache = prefs.getString(_authDataKey);
   }
 }
-
