@@ -112,15 +112,10 @@ flutter:
   # see https://flutter.dev/to/font-from-package
  
 msix_config:
-<<<<<<< HEAD
-  display_name: Your App Name
-  publisher_display_name: Your Company
-=======
-  display_name: 大厨来了
-  publisher_display_name: 大厨来了
->>>>>>> 6092ec7 (Initialize XBoard config and CI builds)
-  identity_name: com.example.yourapp
-  msix_version: 1.0.0.0
-  logo_path: assets/images/app_icon.png
+  display_name: "大厨来了"
+  publisher_display_name: "大厨来了"
+  identity_name: "com.example.yourapp"
+  msix_version: "1.0.0.0"
+  logo_path: "assets/images/app_icon.png"
   capabilities: "internetClient,internetClientServer,privateNetworkClientServer"
 
