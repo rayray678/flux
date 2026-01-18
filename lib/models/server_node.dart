@@ -804,6 +804,14 @@ class ServerNode {
       return outbound;
     } else if (protocol == 'hysteria2') {
       // Hysteria2 协议配置
+      final sni = rawConfig?['sni'] as String?;
+      final allowInsecure = rawConfig?['skip-cert-verify'] == true ||
+          rawConfig?['allowInsecure'] == true ||
+          rawConfig?['insecure'] == true;
+      final obfsType = rawConfig?['obfs'] ?? rawConfig?['obfs-type'];
+      final obfsPassword =
+          rawConfig?['obfs-password'] ?? rawConfig?['obfsPassword'];
+
       final outbound = <String, dynamic>{
         'protocol': 'hysteria2',
         'settings': {
@@ -812,28 +820,22 @@ class ServerNode {
               'address': address,
               'port': port,
               'auth': uuid ?? '',
+              if (sni != null || allowInsecure)
+                'tls': {
+                  if (sni != null) 'sni': sni,
+                  if (allowInsecure) 'insecure': true,
+                },
+              if (obfsType != null || obfsPassword != null)
+                'obfs': {
+                  'type': (obfsType ?? 'salamander').toString(),
+                  if (obfsPassword != null &&
+                      obfsPassword.toString().isNotEmpty)
+                    'password': obfsPassword,
+                },
             }
           ]
         },
       };
-
-      final streamSettings = <String, dynamic>{
-        'network': 'udp',
-        'security': 'tls',
-      };
-      
-      final sni = rawConfig?['sni'] as String?;
-      final skipCertVerify = rawConfig?['skip-cert-verify'] == true ||
-          rawConfig?['allowInsecure'] == true;
-          
-      if (sni != null || skipCertVerify) {
-        streamSettings['tlsSettings'] = <String, dynamic>{
-          if (sni != null) 'serverName': sni,
-          if (skipCertVerify) 'allowInsecure': true,
-        };
-      }
-      
-      outbound['streamSettings'] = streamSettings;
       return outbound;
     } else if (protocol == 'wireguard') {
       // WireGuard 协议配置
