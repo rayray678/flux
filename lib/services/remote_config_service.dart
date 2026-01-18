@@ -22,7 +22,7 @@ class RemoteConfigService {
   ];
 
   /// 默认 API 域名（当 OSS 配置获取失败时使用）
-  static const String _defaultDomain = 'YOUR_API_URL_HERE';
+  static const String _defaultDomain = 'https://vip8888.dpdns.org/api/v1';
 
   /// 配置缓存有效期（小时）
   static const int _cacheValidHours = 6;
