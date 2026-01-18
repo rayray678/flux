@@ -8,7 +8,11 @@
     <uses-permission android:name="android.permission.BIND_VPN_SERVICE" />
     
     <application
+<<<<<<< HEAD
         android:label="flux"
+=======
+        android:label="大厨来了"
+>>>>>>> 6092ec7 (Initialize XBoard config and CI builds)
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"

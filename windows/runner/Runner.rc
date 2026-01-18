@@ -89,6 +89,7 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
+<<<<<<< HEAD
             VALUE "CompanyName", "com.example.yourapp" "\0"
             VALUE "FileDescription", "flux" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
@@ -96,6 +97,15 @@ BEGIN
             VALUE "LegalCopyright", "Copyright (C) 2025 Flux Open Source. All rights reserved." "\0"
             VALUE "OriginalFilename", "flux.exe" "\0"
             VALUE "ProductName", "flux" "\0"
+=======
+            VALUE "CompanyName", "大厨来了" "\0"
+            VALUE "FileDescription", "大厨来了" "\0"
+            VALUE "FileVersion", VERSION_AS_STRING "\0"
+            VALUE "InternalName", "大厨来了" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 Flux Open Source. All rights reserved." "\0"
+            VALUE "OriginalFilename", "flux.exe" "\0"
+            VALUE "ProductName", "大厨来了" "\0"
+>>>>>>> 6092ec7 (Initialize XBoard config and CI builds)
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
